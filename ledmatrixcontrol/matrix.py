@@ -3,13 +3,8 @@ import character_templates as ct
 """ Main class handle display of any string on a matrix of specified size """
 class Matrix:
     """ Properties """
-    width = 0 # width property
-    height = 0 # height property
-    numPixels = 0 #total number of pixels
     fillerNegative = "." # representation of 0
     fillerPositive = "o" # representation of 1
-    """ Matrix container """
-    matrixArr = [] # container for matrix data
     """
         Initiate instance, set property data
     """
@@ -18,6 +13,7 @@ class Matrix:
         self.height = height
         self.numPixels = self.width * self.height
         # Initate matrix property with default values
+        self.matrixArr = []
         for i in range(self.height):
             # Vertical
             if (len(self.matrixArr) < self.height):
