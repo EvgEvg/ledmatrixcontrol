@@ -1,10 +1,13 @@
 """ Character templates """
 import character_templates as ct
+import time
+
 """ Main class handle display of any string on a matrix of specified size """
 class Matrix:
     """ Properties """
     fillerNegative = "." # representation of 0
     fillerPositive = "o" # representation of 1
+    fillerSeconds = "s" # representation for "seconds" filler
     """
         Initiate instance, set property data
     """
@@ -40,13 +43,35 @@ class Matrix:
                         and (0 < (j + startCoordX) < len(self.matrixArr[i]))):
                     self.matrixArr[i + startCoordY][j + startCoordX] = self.fillerPositive
     """
+        Calculate step size for a character
+        @return int
+    """
+    def calculateStep(self, char):
+        splitChar = ct.renderDict[char].strip().split("\n")
+        lineLengths = []
+        for i in range(0, len(splitChar)):
+            lineLengths.append(len(splitChar[i]))
+        return max(lineLengths)
+    """
         Print string onto matrix
         startCoords array format [x, y]
     """
     def addString(self, string, startCoords):
-        charStepX = 4
         startCoordX = startCoords[0]
         startCoordY = startCoords[1]
+        charStepX = 0
         for i in range(len(string)):
-            self.addCharToMatrix(string[i], [(i * charStepX) + startCoordX, startCoordY])
-
+            self.addCharToMatrix(string[i], [charStepX + startCoordX, startCoordY])
+            charStepX += self.calculateStep(string[i])
+    """
+        Fill matrix with "seconds" progress bar
+    """
+    def fillSecondsProgress(self):
+        # Calculate column
+        secondsOnMinute = int(time.localtime().tm_sec)
+        fillToColumn = secondsOnMinute / 2
+        fillToColumn = self.width if (fillToColumn > self.width) else fillToColumn
+        # Fill matrix
+        for i in range(0, len(self.matrixArr)):
+            for j in range(0, fillToColumn):
+                self.matrixArr[i][j] = self.fillerSeconds
