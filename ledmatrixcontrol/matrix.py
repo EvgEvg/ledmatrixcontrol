@@ -72,6 +72,6 @@ class Matrix:
         fillToColumn = secondsOnMinute / 2
         fillToColumn = self.width if (fillToColumn > self.width) else fillToColumn
         # Fill matrix
-        for i in range(0, len(self.matrixArr)):
+        for i in range(0, 1):
             for j in range(0, fillToColumn):
                 self.matrixArr[i][j] = self.fillerSeconds

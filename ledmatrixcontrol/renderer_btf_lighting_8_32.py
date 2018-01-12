@@ -15,7 +15,7 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 """ https://www.amazon.com/gp/product/B01DC0IPVU/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1 """
 class rendererBtfLighting8x32(rendererAbstract):
     """ Colors for positive and negative """
-    colorFillerPositive = Color(0, 0, 100)
+    colorFillerPositive = Color(0, 0, 45)
     colorFillerNegative = Color(0, 0, 0)
     """ Initialize """
     def __init__(self):
@@ -55,7 +55,7 @@ class rendererBtfLighting8x32(rendererAbstract):
             return self.colorFillerNegative
         elif matrix.fillerSeconds == matrixFiller:
             redBase = 25
-            greenBase = int(25 - (columnNum * 0.78)) # I need 0-25 as function of 0-32
+            greenBase = 25 #int(25 - (columnNum * 0.78)) # I need 0-25 as function of 0-32
             blueBase = 0
             return Color(redBase, greenBase, 0)
         return self.colorFillerNegative

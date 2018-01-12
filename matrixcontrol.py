@@ -11,6 +11,7 @@ rendererLed = rendererBtfLighting8x32()
 
 while(True):
     matrix = Matrix(ledScreenWidth, ledScreenHeight)
+    matrix.fillSecondsProgress()
     matrix.addString(
         time.strftime("%H%M", time.localtime()),
         [0, 0]
